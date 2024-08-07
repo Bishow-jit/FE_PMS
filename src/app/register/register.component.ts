@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-register',
@@ -17,7 +19,7 @@ export class RegisterComponent {
 
   baseUrl : string ="http://localhost:8080/api/v1";
 
-  constructor(private http:HttpClient){
+  constructor(private http:HttpClient , private router: Router ){
 
   }
 
@@ -31,6 +33,13 @@ export class RegisterComponent {
       "password":this.password
     }
 
-    this.http.post(baseUrl+)
+    this.http.post(this.baseUrl+"/registration",userDto).subscribe((response:any)=>{
+     if(response.statusCode === 200){
+      alert(response);
+      this.router.navigateByUrl("/login");
+     }else{
+      alert("Registration Failed");
+     }
+    });
   }
 }
