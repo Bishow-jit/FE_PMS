@@ -15,8 +15,10 @@ export class RegisterComponent {
   username : string = "";
   password : string = "";
 
+  baseUrl : string ="http://localhost:8080/api/v1";
+
   constructor(private http:HttpClient){
-    
+
   }
 
   register(){
@@ -28,5 +30,7 @@ export class RegisterComponent {
       "username":this.username,
       "password":this.password
     }
+
+    this.http.post(baseUrl+)
   }
 }
