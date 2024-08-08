@@ -24,7 +24,7 @@ export class RegisterComponent {
   }
 
   register(){
-    let userDto ={
+    let userDto = {
       "name":this.name,
       "email":this.email,
       "mobileNo":this.mobileNo,
@@ -32,14 +32,9 @@ export class RegisterComponent {
       "username":this.username,
       "password":this.password
     }
-
     this.http.post(this.baseUrl+"/registration",userDto).subscribe((response:any)=>{
-     if(response.statusCode === 200){
-      alert(response);
-      this.router.navigateByUrl("/login");
-     }else{
-      alert("Registration Failed");
-     }
     });
+    alert('Registration Success');
+    this.router.navigateByUrl('/login');
   }
 }

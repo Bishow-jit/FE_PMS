@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { register } from 'module';
 import { RegisterComponent } from './register/register.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LayoutComponent } from './layout/layout.component';
+import { TableDataComponent } from './table-data/table-data.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
 
 const routes: Routes = [
   {
@@ -17,7 +18,7 @@ const routes: Routes = [
     pathMatch : 'full'
   },
   {
-    path :'',
+    path :'layout',
     component : LayoutComponent,
     children : [
       {
@@ -27,8 +28,16 @@ const routes: Routes = [
     ]
   },
   {
+    path : 'createProject',
+    component : CreateProjectComponent
+  },
+  {
     path :'register',
     component : RegisterComponent
+  },
+  {
+    path : 'tabledata',
+    component :TableDataComponent
   },
   {
     path :"**",

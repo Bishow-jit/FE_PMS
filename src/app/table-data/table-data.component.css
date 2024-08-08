@@ -1,0 +1,11 @@
+.table {
+    background-color: #f8f9fa; /* Light background color for the table */
+  }
+  
+  .table td, .table th {
+    vertical-align: middle; /* Center-align content vertically */
+  }
+  
+  .img-thumbnail {
+    border-radius: 50%; /* Circular images */
+  }

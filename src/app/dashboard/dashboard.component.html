@@ -1,1 +1,37 @@
-<p>dashboard works!</p>
+<div class="container mt-5">
+    <h3>Project</h3>
+    <div *ngIf="!isLoading">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Intro</th>
+            <th scope="col">Status</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">Owner Name</th>
+            <th scope="col">Owner Email</th>
+            <th scope="col">Members(Name,Email)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let project of projectData">
+            <td>{{ project.name }}</td>
+            <td>{{ project.intro }}</td>
+            <td>{{ project.status }}</td>
+            <td>{{ project.startDateTime }}</td>
+            <td>{{ project.endDateTime }}</td>
+            <td>{{ project.owner.name }}</td>
+            <td>{{ project.owner.email }}</td>
+            <td>
+              <ul>
+                <li *ngFor="let member of project.members">
+                  {{ member.name }} ({{ member.email }})
+                </li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

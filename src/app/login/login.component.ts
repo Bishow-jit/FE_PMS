@@ -16,19 +16,25 @@ export class LoginComponent {
     
   }
 
-  login(){
-    let loginDto ={
-      "username":this.username,
-      "password":this.password
-    }
-    this.http.post(this.baseUrl+"/login",loginDto).subscribe((response:any)=>{
-     if(response.statusCode === 200){
-      alert("Login Success");
-      localStorage.setItem("token",response.accessToken);
-      this.router.navigateByUrl('/dashboard')
-     }else{
-      alert(response);
-     }
-    });
+  login() {
+    const loginDto = {
+      username: this.username,
+      password: this.password
+    };
+
+    this.http.post(this.baseUrl + "/login", loginDto).subscribe(
+      (response: any) => {
+        if (response && response.message === 'Success') {
+          console.log('resp', response);
+          alert('Login Success');
+          localStorage.setItem('token', response.accessToken);
+          this.router.navigateByUrl('/layout');
+        }
+      },
+      (error: any) => {
+        console.error('Login error:', error);
+        alert('Invalid Username or Password');
+      }
+    );
   }
 }

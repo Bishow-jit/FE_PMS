@@ -6,9 +6,12 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LayoutComponent } from './layout/layout.component';
+import { customInterceptor } from './Interceptor/custom.interceptor';
+import { TableDataComponent } from './table-data/table-data.component';
+import { CreateProjectComponent } from './create-project/create-project.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,9 @@ import { LayoutComponent } from './layout/layout.component';
     LoginComponent,
     RegisterComponent,
     DashboardComponent,
-    LayoutComponent
+    LayoutComponent,
+    TableDataComponent,
+    CreateProjectComponent
   ],
   imports: [
     BrowserModule,
@@ -25,11 +30,7 @@ import { LayoutComponent } from './layout/layout.component';
     HttpClientModule
   ],
   providers: [
-    {
-      provide:HTTP_INTERCEPTORS,
-      useClass: NeedtoWork,
-      multi:true
-    },
+    provideHttpClient(withInterceptors([customInterceptor]),withFetch()),
     provideClientHydration()
   ],
   bootstrap: [AppComponent]
