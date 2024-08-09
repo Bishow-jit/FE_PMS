@@ -18,7 +18,7 @@ export class LoginComponent {
 
   login() {
     if (this.username && this.password) {
-      const loginDto = {
+      let loginDto = {
         username: this.username,
         password: this.password
       };

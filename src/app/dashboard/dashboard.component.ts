@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +15,7 @@ export class DashboardComponent implements OnInit{
   endDateTime : string = "";
   baseUrl : string ="http://localhost:8080/api/v1";
   
-  constructor(private http:HttpClient){}
+  constructor(private http:HttpClient, private router:Router){}
   ngOnInit(): void {
     this.fetchProjectData();
   }
@@ -56,5 +57,11 @@ export class DashboardComponent implements OnInit{
       this.isLoading = false;
     });
 
+  }
+
+  addMember(id:number){
+    if(id){
+      this.router.navigateByUrl('/assign-member/'+id);
+    }
   }
 }

@@ -1,7 +1,7 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 
 export const customInterceptor: HttpInterceptorFn = (req, next) => {
-  const excludedUrls = ['/api/v1/registration','/api/v1/login'];
+  const excludedUrls = ['/registration','/login'];
 
   // Check if the request URL is in the excluded URLs
   if (excludedUrls.some(url => req.url.includes(url))) {
