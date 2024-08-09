@@ -18,23 +18,31 @@ export class RegisterComponent {
   password : string = "";
 
   baseUrl : string ="http://localhost:8080/api/v1";
+ 
 
   constructor(private http:HttpClient , private router: Router ){
 
   }
 
+
   register(){
-    let userDto = {
-      "name":this.name,
-      "email":this.email,
-      "mobileNo":this.mobileNo,
-      "gender":this.gender,
-      "username":this.username,
-      "password":this.password
+      let userDto = {
+        "name":this.name,
+        "email":this.email,
+        "mobileNo":this.mobileNo,
+        "gender":this.gender,
+        "username":this.username,
+        "password":this.password
+      }
+      this.http.post(this.baseUrl+"/registration",userDto).subscribe((response:any)=>{
+        if(response.data){
+          alert(response.msg);
+          this.router.navigateByUrl('/login');
+        }else{
+          alert(response.msg);
+        }
+      });      
     }
-    this.http.post(this.baseUrl+"/registration",userDto).subscribe((response:any)=>{
-    });
-    alert('Registration Success');
-    this.router.navigateByUrl('/login');
-  }
+  
+    
 }

@@ -1,5 +1,5 @@
 .createProject {
-    height: 100%;
+    height: 100vh;
     margin: 0;
     display: flex;
     justify-content: center;

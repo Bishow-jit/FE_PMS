@@ -10,11 +10,30 @@ export class DashboardComponent implements OnInit{
 
   projectData : any[] = [];
   isLoading: boolean = true;
+  startDateTime : string = "";
+  endDateTime : string = "";
   baseUrl : string ="http://localhost:8080/api/v1";
   
   constructor(private http:HttpClient){}
   ngOnInit(): void {
     this.fetchProjectData();
+  }
+
+  searchProjects(){
+    if(this.startDateTime && this.endDateTime){
+      let startDate = new Date (this.startDateTime).toISOString().split('.')[0];
+      let endDate = new Date (this.endDateTime).toISOString().split('.')[0];
+      console.log('parameter',{
+        startDate,
+        endDate
+      })
+      const apiUrl = `${this.baseUrl}/project/withinDateRange?StartDateTime=${startDate}&EndDateTime=${endDate}`;
+      this.http.get(apiUrl).subscribe((response: any) => {
+        this.projectData = response;
+        this.isLoading = false;
+        console.log(this.projectData);
+      });
+    }
   }
 
   fetchProjectData(): void {

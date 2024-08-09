@@ -8,11 +8,19 @@ export const customInterceptor: HttpInterceptorFn = (req, next) => {
     return next(req); // Skip the interceptor
   }
 
-  const token = localStorage.getItem('token');
-  const clonereq = req.clone({
-    setHeaders:{
-      Authorization: `Bearer ${token}`
+
+  if (typeof localStorage !== 'undefined') {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const clonereq = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+      return next(clonereq);
     }
-  })
-  return next(clonereq);
+  }
+
+  console.log("no token available")
+  return next(req);
 };
