@@ -29,49 +29,39 @@
               <h4>Assign Members to Project</h4>
             </div>
             <div class="card-body">
-              <form #memberForm="ngForm" (ngSubmit)="assignMembers()">
+              <form #memberForm="ngForm" (ngSubmit)="assign()">
                 <div class="form-group mb-3">
                   <label for="selectedMember">Select Member:</label>
-                  <!-- <select
-                    [(ngModel)]="selectedMember"
-                    [ngModelOptions]="{ standalone: true }"
-                    id="choices-multiple-remove-button"
-                    name="selectedMember"
-                    class="form-control"
-                    required
-                    placeholder="Select upto 5 member" multiple
-                  >
-                    <option value="" disabled selected>Select a member</option>
-                    <option *ngFor="let member of users" [value]="member.id">
-                      {{ member.name }} ({{ member.email }})
-                    </option>
-                  </select> -->
                   <ng-multiselect-dropdown
                     [settings]="dropdownSettings"
                     [data]="users"
+                    [(ngModel)]="project.members.id"
                     (onSelect)="onItemSelect($event)"
                     (onDeSelect)="onDeSelect($event)">
                   </ng-multiselect-dropdown>
                 </div>
                 <div class="d-flex justify-content-center">
-                  <button type="submit" class="btn btn-primary" (click)="assign()">
+                  <button type="submit" class="btn btn-primary" [disabled]="isButtonDisable" (click)="assign()">
                     Assign Members
                   </button>
                 </div>
+              <div class="d-flex justify-content-center">
+                <span *ngIf="isButtonDisable" text="text-danger">5 Members Already Added</span>
+              </div>
               </form>
             </div>
           </div>
   
        
-          <div *ngIf="assignedMembers" class="card mt-4">
+          <div class="card mt-4">
             <div class="card-header">
               <h4>Assigned Members</h4>
             </div>
             <div class="card-body">
               <ul class="list-group">
-                  <li *ngFor="let member of assignedMembers" class="list-group-item d-flex justify-content-between align-items-center">
+                  <li *ngFor="let member of project.members" class="list-group-item d-flex justify-content-between align-items-center">
                     {{ member.name }} ({{ member.email }})
-                    <button class="btn btn-danger btn-sm" (click)="removeMember(member.id)">Remove</button>
+                    <!-- <button class="btn btn-danger btn-sm" (click)="removeMember(member.id)">Remove</button> -->
                   </li>
               </ul>
             </div>

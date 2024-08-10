@@ -1,0 +1,28 @@
+<div class="card mt-4">
+    <div class="card-header">
+        <h4>{{ data.project.name }}</h4>
+    </div>
+    <div class="card-body">
+        <p><strong>Intro:</strong> {{ data.project.intro }}</p>
+        <p><strong>Status:</strong> {{ data.project.status }}</p>
+        <p><strong>Start Date:</strong> {{ data.project.startDateTime }}</p>
+        <p><strong>End Date:</strong> {{ data.project.endDateTime }}</p>
+        <p><strong>Project Owner Name:</strong> {{ data.project.owner.name}}</p>
+        <p><strong>Project Owner Email:</strong> {{ data.project.owner.email}}</p>
+        <p><strong>Project Owner Contact:</strong> {{ data.project.owner.mobileNo}}</p>
+    </div>
+    <div class="card-header">
+        <h4>Assigned Project Members</h4>
+    </div>
+    <div class="card-body">
+        <ul *ngFor="let member of data.project.members" class="list-group">
+                <p><strong>Name:</strong> {{ member.name }}</p>
+                <p><strong>Email:</strong> {{ member.email }}</p>
+                <p><strong>Contact:</strong> {{ member.mobileNo }}</p>
+        </ul>
+    </div>
+</div>
+
+<div>
+    <button mat-button class="d-flex align-content-center" (click)="onClose()">Close</button>
+</div>

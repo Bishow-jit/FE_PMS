@@ -1,0 +1,8 @@
+
+  .card-body {
+    max-height: 60vh; /* Adjust as needed */
+    overflow-y: auto; /* Enables vertical scrolling for the card body */
+  }
+
+
+  

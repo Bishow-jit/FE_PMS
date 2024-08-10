@@ -86,9 +86,11 @@
                 </ul>
               </td>
               <td>
-                <a class="add" title="Add" data-toggle="tooltip"><i class="material-icons"></i></a>
-                <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons"></i></a>
-                <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons"></i></a>
+                <button mat-button (click)="openProjectDetail(project)">
+                  View Details
+                </button>
+                <a *ngIf="userMap.get(project.owner.id)" class="edit" title="Edit" data-toggle="tooltip" (click)="onEditClick(project.id)"><i class="material-icons"></i></a>
+                <a *ngIf="userMap.get(project.owner.id)" class="delete" title="Delete" data-toggle="tooltip" (click)="onDeleteClick(project.id)"><i class="material-icons"></i></a>
               </td>
               <td>
                 <button type="button" class="btn btn-primary btn-block" (click)="addMember(project.id)">

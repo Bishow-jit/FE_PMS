@@ -14,6 +14,8 @@ import { TableDataComponent } from './table-data/table-data.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { AssignMemberComponent } from './assign-member/assign-member.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { ProjectDetailDialogComponent } from './project-detail-dialog/project-detail-dialog.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     LayoutComponent,
     TableDataComponent,
     CreateProjectComponent,
-    AssignMemberComponent
+    AssignMemberComponent,
+    ProjectDetailDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +39,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
   providers: [
     provideHttpClient(withInterceptors([customInterceptor]),withFetch()),
     provideClientHydration(),
+    provideAnimationsAsync(),
   ],
   bootstrap: [AppComponent]
 })

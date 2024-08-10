@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ProjectDetailDialogComponent } from '../project-detail-dialog/project-detail-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -9,13 +11,17 @@ import { Router } from '@angular/router';
 })
 export class DashboardComponent implements OnInit{
 
-  projectData : any[] = [];
+  projectData : any;
+  currentUserData : any;
+  isProjectOwner : boolean = false;
   isLoading: boolean = true;
   startDateTime : string = "";
   endDateTime : string = "";
+  userMap: Map<number, boolean> = new Map();
   baseUrl : string ="http://localhost:8080/api/v1";
   
-  constructor(private http:HttpClient, private router:Router){}
+  
+  constructor(private http:HttpClient, private router:Router,public dialog: MatDialog){}
   ngOnInit(): void {
     this.fetchProjectData();
   }
@@ -33,6 +39,7 @@ export class DashboardComponent implements OnInit{
         this.projectData = response;
         this.isLoading = false;
         console.log(this.projectData);
+        this.fetchCurentUserDetails();
       });
     }
   }
@@ -55,13 +62,65 @@ export class DashboardComponent implements OnInit{
       this.projectData = response;
       console.log('projectdata', this.projectData)
       this.isLoading = false;
+      this.fetchCurentUserDetails();
     });
 
+  }
+
+  fetchCurentUserDetails(): void{
+    this.http.get(this.baseUrl+"/loggedInUser").subscribe((response:any)=>{
+      if(response){
+        this.currentUserData = response;
+        debugger
+        if(this.projectData && this.currentUserData){
+         for(let project of this.projectData){
+          if(project.owner.id === this.currentUserData.id){
+            this.userMap.set(this.currentUserData.id,true);
+          }else{
+            this.userMap.set(this.currentUserData.id,false);
+          }
+         }
+      }
+      }
+    },(error)=>{
+      console.log("Error while getting users Data",error);
+    })
+  
   }
 
   addMember(id:number){
     if(id){
       this.router.navigateByUrl('/assign-member/'+id);
     }
+  }
+
+  openProjectDetail(project: any): void {
+    this.dialog.open(ProjectDetailDialogComponent, {
+      width: '500px',
+      maxHeight: '80vh',
+      data: { project },
+      panelClass: 'custom-dialog-container' // Add a custom class if needed
+    });
+  }
+
+ 
+
+  onEditClick(id:number){
+
+  }
+
+  onDeleteClick(id:number){
+    debugger
+    let projectToBeDeleted = this.projectData.filter((project: { id: number; }) => project.id === id);
+    alert("Are You Sure!!You Want To Delete "+projectToBeDeleted[0].name)
+    this.http.delete(this.baseUrl+"/delete/project?id="+id).subscribe((response:any)=>{
+      if(response.data){
+        alert(response.msg)
+      }else{
+        alert(response.msg)
+      }
+    },(error)=>{
+
+    })
   }
 }

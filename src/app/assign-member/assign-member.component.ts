@@ -17,6 +17,7 @@ export class AssignMemberComponent implements OnInit {
   selectedMembers: any[] = [];;
   assignedMembers: any[] = [];
   dropdownSettings:IDropdownSettings={};
+  isButtonDisable : boolean = false;
 
   id : number = -1;
   name : string =""
@@ -33,8 +34,9 @@ export class AssignMemberComponent implements OnInit {
     this.dropdownSettings = {
       idField: 'id',
       textField: 'name',
-      itemsShowLimit: 5,
-      allowSearchFilter: true
+      allowSearchFilter: true,
+      enableCheckAll: false,
+      limitSelection: 5
     };
   }
 
@@ -45,6 +47,9 @@ export class AssignMemberComponent implements OnInit {
         this.assignedMembers = this.project.members
         console.log('data',this.project)
         console.log('members data',  this.assignedMembers)
+        if( this.assignedMembers.length >= 5){
+          this.isButtonDisable = true
+        } 
       }
      },(error)=>{
       console.log('Error while getting project data',error);
@@ -64,17 +69,20 @@ export class AssignMemberComponent implements OnInit {
   }
 
   onItemSelect(item: any) {
-    console.log('Selected Item:', item);
-    if (!this.selectedMembers) {
-      this.selectedMembers = [];
+    if (this.selectedMembers.length >= 5) {
+      this.selectedMembers.pop();
+    } else {
+      // console.log('Selected Item:', item);
+      if (!this.selectedMembers) {
+        this.selectedMembers = [];
+      }
+      this.selectedMembers.push(item);
     }
-    this.selectedMembers.push(item);
-    console.log('Pushed Data :',  this.selectedMembers);
   }
 
   onDeSelect(item: any) {
     console.log('Deselected Item:', item);
-    this.selectedMembers = this.selectedMembers.filter((user: { id: any; }) => user.id !== item.id);
+    this.selectedMembers = this.selectedMembers.filter(member => member.id !== item.id);
   }
 
   assign(){
@@ -83,8 +91,8 @@ export class AssignMemberComponent implements OnInit {
       this.http.post(this.baseUrl+"/add/project/members/"+id,this.selectedMembers).subscribe((response:any)=>{
       if(response.data){
         alert(response.msg)
-        this.assignedMembers = response.data.members;
-        console.log("members",this.assignedMembers);
+        // this.assignedMembers = response.data.members;
+        // console.log("members",this.assignedMembers);
       }
       },(error)=>{
         console.log("Error While posting member assign data",error)
