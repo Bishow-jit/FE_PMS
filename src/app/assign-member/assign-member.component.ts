@@ -29,7 +29,7 @@ export class AssignMemberComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     if(id){
       this.fetchProjectDataId(id);
-      this.getUserslist();
+    
     }
     this.dropdownSettings = {
       idField: 'id',
@@ -45,6 +45,7 @@ export class AssignMemberComponent implements OnInit {
       if(response){
         this.project = response;
         this.assignedMembers = this.project.members
+        this.getUserslist();
         console.log('data',this.project)
         console.log('members data',  this.assignedMembers)
         if( this.assignedMembers.length >= 5){

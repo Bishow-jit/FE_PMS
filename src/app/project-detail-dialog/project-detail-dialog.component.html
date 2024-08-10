@@ -1,6 +1,10 @@
-<div class="card mt-4">
+<div class="card">
+    <div>
+        <button class="btn btn-danger position-absolute top-0 end-0 p-1" (click)="onClose()">Close</button>
+    </div>
     <div class="card-header">
-        <h4>{{ data.project.name }}</h4>
+        <h1>Project Details</h1>
+        <h4>Project Name : {{ data.project.name }}</h4>
     </div>
     <div class="card-body">
         <p><strong>Intro:</strong> {{ data.project.intro }}</p>
@@ -14,15 +18,14 @@
     <div class="card-header">
         <h4>Assigned Project Members</h4>
     </div>
-    <div class="card-body">
-        <ul *ngFor="let member of data.project.members" class="list-group">
+    <div class="mt-2 ">
+        <ul *ngFor="let member of data.project.members">
+            <div  class="card  my-1 p-1">
                 <p><strong>Name:</strong> {{ member.name }}</p>
                 <p><strong>Email:</strong> {{ member.email }}</p>
                 <p><strong>Contact:</strong> {{ member.mobileNo }}</p>
+            </div>
+                
         </ul>
     </div>
-</div>
-
-<div>
-    <button mat-button class="d-flex align-content-center" (click)="onClose()">Close</button>
 </div>

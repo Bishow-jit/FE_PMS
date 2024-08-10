@@ -3,6 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ProjectDetailDialogComponent } from '../project-detail-dialog/project-detail-dialog.component';
+import { UpdateProjectComponent } from '../update-project/update-project.component';
+import { DeletePeojectComponent } from '../delete-peoject/delete-peoject.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -71,7 +73,6 @@ export class DashboardComponent implements OnInit{
     this.http.get(this.baseUrl+"/loggedInUser").subscribe((response:any)=>{
       if(response){
         this.currentUserData = response;
-        debugger
         if(this.projectData && this.currentUserData){
          for(let project of this.projectData){
           if(project.owner.id === this.currentUserData.id){
@@ -96,8 +97,8 @@ export class DashboardComponent implements OnInit{
 
   openProjectDetail(project: any): void {
     this.dialog.open(ProjectDetailDialogComponent, {
-      width: '500px',
-      maxHeight: '80vh',
+      width :'60vw',
+    maxHeight: '80vh',
       data: { project },
       panelClass: 'custom-dialog-container' // Add a custom class if needed
     });
@@ -105,22 +106,23 @@ export class DashboardComponent implements OnInit{
 
  
 
-  onEditClick(id:number){
-
+  onEditClick(project:any):void {
+   this.dialog.open(UpdateProjectComponent,{
+    width :'60vw',
+    maxHeight: '80vh',
+    data:{project},
+    panelClass: 'custom-dialog-container' 
+   });
   }
 
-  onDeleteClick(id:number){
-    debugger
-    let projectToBeDeleted = this.projectData.filter((project: { id: number; }) => project.id === id);
-    alert("Are You Sure!!You Want To Delete "+projectToBeDeleted[0].name)
-    this.http.delete(this.baseUrl+"/delete/project?id="+id).subscribe((response:any)=>{
-      if(response.data){
-        alert(response.msg)
-      }else{
-        alert(response.msg)
-      }
-    },(error)=>{
-
-    })
+  OnDelete(project:any):void{
+    this.dialog.open(DeletePeojectComponent,{
+      width :'35vw',
+      maxHeight: '20vh',
+      data:{project},
+      panelClass: 'custom-dialog-container' 
+     });
   }
+
+
 }

@@ -85,12 +85,16 @@
                   </li>
                 </ul>
               </td>
-              <td>
-                <button mat-button (click)="openProjectDetail(project)">
+              <td class="text-center d-flex flex-column">
+                <button type="button" class="btn btn-primary btn-block" (click)="openProjectDetail(project)">
                   View Details
                 </button>
-                <a *ngIf="userMap.get(project.owner.id)" class="edit" title="Edit" data-toggle="tooltip" (click)="onEditClick(project.id)"><i class="material-icons"></i></a>
-                <a *ngIf="userMap.get(project.owner.id)" class="delete" title="Delete" data-toggle="tooltip" (click)="onDeleteClick(project.id)"><i class="material-icons"></i></a>
+                <button *ngIf="userMap.get(project.owner.id)"  type="button" class="btn btn-success btn-block my-3" (click)="onEditClick(project)">
+                  Edit
+                </button>
+                <button  *ngIf="userMap.get(project.owner.id)"  type="button" class="btn btn-danger btn-block" (click)="OnDelete(project)">
+                  Delete
+                </button>
               </td>
               <td>
                 <button type="button" class="btn btn-primary btn-block" (click)="addMember(project.id)">

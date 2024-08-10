@@ -16,6 +16,8 @@ import { AssignMemberComponent } from './assign-member/assign-member.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { ProjectDetailDialogComponent } from './project-detail-dialog/project-detail-dialog.component';
+import { UpdateProjectComponent } from './update-project/update-project.component';
+import { DeletePeojectComponent } from './delete-peoject/delete-peoject.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { ProjectDetailDialogComponent } from './project-detail-dialog/project-de
     TableDataComponent,
     CreateProjectComponent,
     AssignMemberComponent,
-    ProjectDetailDialogComponent
+    ProjectDetailDialogComponent,
+    UpdateProjectComponent,
+    DeletePeojectComponent
   ],
   imports: [
     BrowserModule,

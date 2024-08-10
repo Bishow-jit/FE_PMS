@@ -21,7 +21,6 @@ export class CreateProjectComponent {
   endDateTime : string = "";
  
   createProject(){
-    debugger
     if (this.endDateTime !=='' && this.startDateTime) {
       if (new Date(this.endDateTime) <= new Date(this.startDateTime)) {
         alert('End Date must be greater than Start Date');
