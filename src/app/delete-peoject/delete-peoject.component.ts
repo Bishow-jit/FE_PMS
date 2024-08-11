@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-delete-peoject',
@@ -11,6 +12,7 @@ export class DeletePeojectComponent {
   baseUrl : string ="http://localhost:8080/api/v1";
   
   constructor(
+    private toastr: ToastrService,
     private http:HttpClient,
     public dialogRef: MatDialogRef<DeletePeojectComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -33,9 +35,11 @@ openDeleteModal() {
   onDeleteClick(id:number){
     this.http.delete(this.baseUrl+"/delete/project?id="+id).subscribe((response:any)=>{
       if(response.data){
+        this.toastr.warning('Project Deleted','Delete')
         this.onClose();
       }else{
         alert(response.msg)
+        this.toastr.error(response.msg,'Error')
       }
     },(error)=>{
        console.log("Error while deleting project",error);

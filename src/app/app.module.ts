@@ -18,6 +18,8 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { ProjectDetailDialogComponent } from './project-detail-dialog/project-detail-dialog.component';
 import { UpdateProjectComponent } from './update-project/update-project.component';
 import { DeletePeojectComponent } from './delete-peoject/delete-peoject.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -38,7 +40,9 @@ import { DeletePeojectComponent } from './delete-peoject/delete-peoject.componen
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-    NgMultiSelectDropDownModule
+    NgMultiSelectDropDownModule,
+    BrowserAnimationsModule, 
+    ToastrModule.forRoot(),
   ],
   providers: [
     provideHttpClient(withInterceptors([customInterceptor]),withFetch()),

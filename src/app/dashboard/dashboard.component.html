@@ -74,8 +74,8 @@
               <td>{{ project.name }}</td>
               <td>{{ project.intro }}</td>
               <td>{{ project.status }}</td>
-              <td>{{ project.startDateTime }}</td>
-              <td>{{ project.endDateTime }}</td>
+              <td>{{ project.startDateTime | date:'dd-MM-yyyy'  }}</td>
+              <td>{{ project.endDateTime  | date:'dd-MM-yyyy' }}</td>
               <td>{{ project.owner.name }}</td>
               <td>{{ project.owner.email }}</td>
               <td>

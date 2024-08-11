@@ -75,12 +75,14 @@ export class DashboardComponent implements OnInit{
         this.currentUserData = response;
         if(this.projectData && this.currentUserData){
          for(let project of this.projectData){
+
           if(project.owner.id === this.currentUserData.id){
-            this.userMap.set(this.currentUserData.id,true);
+            this.userMap.set(project.owner.id,true);
           }else{
-            this.userMap.set(this.currentUserData.id,false);
+            this.userMap.set(project.owner.id,false);
           }
          }
+         console.log('userMa',this.userMap)
       }
       }
     },(error)=>{
@@ -117,8 +119,8 @@ export class DashboardComponent implements OnInit{
 
   OnDelete(project:any):void{
     this.dialog.open(DeletePeojectComponent,{
-      width :'35vw',
-      maxHeight: '20vh',
+      width :'30vw',
+      maxHeight: '30vh',
       data:{project},
       panelClass: 'custom-dialog-container' 
      });

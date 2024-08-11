@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -20,7 +21,10 @@ export class RegisterComponent {
   baseUrl : string ="http://localhost:8080/api/v1";
  
 
-  constructor(private http:HttpClient , private router: Router ){
+  constructor(
+    private toastr: ToastrService,
+    private http:HttpClient , 
+    private router: Router ){
 
   }
 
@@ -36,10 +40,12 @@ export class RegisterComponent {
       }
       this.http.post(this.baseUrl+"/registration",userDto).subscribe((response:any)=>{
         if(response.data){
-          alert(response.msg);
+          // alert(response.msg);
+          this.toastr.success(response.msg,'Success')
           this.router.navigateByUrl('/login');
         }else{
-          alert(response.msg);
+          // alert(response.msg);
+          this.toastr.error(response.msg,'Error')
         }
       });      
     }

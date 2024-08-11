@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { error } from 'console';
 import { response } from 'express';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-assign-member',
@@ -21,7 +22,7 @@ export class AssignMemberComponent implements OnInit {
 
   id : number = -1;
   name : string =""
-  constructor (private route: ActivatedRoute , private http : HttpClient){
+  constructor (private toastr: ToastrService,private route: ActivatedRoute , private http : HttpClient){
 
   }
 
@@ -91,17 +92,16 @@ export class AssignMemberComponent implements OnInit {
     if(this.selectedMembers && id){
       this.http.post(this.baseUrl+"/add/project/members/"+id,this.selectedMembers).subscribe((response:any)=>{
       if(response.data){
-        alert(response.msg)
+        // alert(response.msg)
         // this.assignedMembers = response.data.members;
         // console.log("members",this.assignedMembers);
+        this.toastr.success(response.msg,'Member Added')
       }
       },(error)=>{
-        console.log("Error While posting member assign data",error)
+        //this.toastr.error('Error While Member Assigning','Error')
+        // console.log("Error While posting member assign data",error)
+
       })
     }
-  }
-
-  removeMember(id:number){
-
   }
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-project',
@@ -12,6 +13,7 @@ export class UpdateProjectComponent implements OnInit {
 
 
   constructor(
+    private toastr: ToastrService,
     private router:Router,
     private http:HttpClient,
     public dialogRef: MatDialogRef<UpdateProjectComponent>,
@@ -42,17 +44,18 @@ export class UpdateProjectComponent implements OnInit {
     if(this.data.project.status==='END'){
       this.status=2
     }
-    this.startDateTime = new Date(this.data.project.startDateTime).toLocaleDateString('en-US', {
-      year: '2-digit',
-      month: '2-digit',
-      day: '2-digit'
-  });
-    this.endDateTime=new Date(this.data.project.endDateTime).toLocaleDateString('en-US',{
-      year: '2-digit',
-      month: '2-digit',
-      day: '2-digit'
-  });
-   this.owner = this.data.project.owner;
+
+    const startDate = new Date(this.data.project.startDateTime);
+    startDate.setDate(startDate.getDate() + 1);
+    this.startDateTime = startDate.toISOString().split('T')[0];
+  // this.startDateTime = new Date(this.data.project.startDateTime).toISOString().split('T')[0];
+
+  const endDate = new Date(this.data.project.endDateTime);
+  endDate.setDate(endDate.getDate() + 1);
+  this.endDateTime = endDate.toISOString().split('T')[0];
+
+  // this.endDateTime = new Date(this.data.project.endDateTime).toISOString().split('T')[0];
+  this.owner = this.data.project.owner;
   }
 
   onClose(): void {
@@ -67,14 +70,15 @@ export class UpdateProjectComponent implements OnInit {
       "intro":this.intro,
       "status":this.status,
       "startDateTime": new Date(this.startDateTime),
-      "endDateTime":new Date(this.endDateTime),
+      "endDateTime": new Date(this.endDateTime),
       "owner":this.owner
     }
 
     if(id && projectDto){
        this.http.put(this.baseUrl+"/update/project/"+id,projectDto).subscribe((response:any)=>{
         if(response){
-          alert("Update Successful");
+          // alert("Update Successful");
+          this.toastr.success('Update Successful','Success')
           this.router.navigateByUrl('/layout');
           this.onClose();
         }

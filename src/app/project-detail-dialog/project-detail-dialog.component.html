@@ -9,8 +9,8 @@
     <div class="card-body">
         <p><strong>Intro:</strong> {{ data.project.intro }}</p>
         <p><strong>Status:</strong> {{ data.project.status }}</p>
-        <p><strong>Start Date:</strong> {{ data.project.startDateTime }}</p>
-        <p><strong>End Date:</strong> {{ data.project.endDateTime }}</p>
+        <p><strong>Start Date:</strong> {{ data.project.startDateTime | date:'dd-MM-yyyy' }}</p>
+        <p><strong>End Date:</strong> {{ data.project.endDateTime  | date:'dd-MM-yyyy'}}</p>
         <p><strong>Project Owner Name:</strong> {{ data.project.owner.name}}</p>
         <p><strong>Project Owner Email:</strong> {{ data.project.owner.email}}</p>
         <p><strong>Project Owner Contact:</strong> {{ data.project.owner.mobileNo}}</p>
