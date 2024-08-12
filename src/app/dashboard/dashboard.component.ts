@@ -32,10 +32,10 @@ export class DashboardComponent implements OnInit{
     if(this.startDateTime && this.endDateTime){
       let startDate = new Date (this.startDateTime).toISOString().split('.')[0];
       let endDate = new Date (this.endDateTime).toISOString().split('.')[0];
-      console.log('parameter',{
-        startDate,
-        endDate
-      })
+      // console.log('parameter',{
+      //   startDate,
+      //   endDate
+      // })
       const apiUrl = `${this.baseUrl}/project/withinDateRange?StartDateTime=${startDate}&EndDateTime=${endDate}`;
       this.http.get(apiUrl).subscribe((response: any) => {
         this.projectData = response;
@@ -52,17 +52,17 @@ export class DashboardComponent implements OnInit{
 
     // Get the first day of the current month
     const startDate = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('.')[0];
-    console.log('startDate', startDate);
+    // console.log('startDate', startDate);
 
     // Get the last day of the current month
     const endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0).toISOString().split('.')[0];
-    console.log('endDate', endDate);
+    // console.log('endDate', endDate);
     const apiUrl = `${this.baseUrl}/project/withinDateRange?StartDateTime=${startDate}&EndDateTime=${endDate}`;
-    console.log('api', apiUrl)
+    // console.log('api', apiUrl)
     this.http.get(apiUrl).subscribe((response: any) => {
-      console.log('resp', response);
+      // console.log('resp', response);
       this.projectData = response;
-      console.log('projectdata', this.projectData)
+      // console.log('projectdata', this.projectData)
       this.isLoading = false;
       this.fetchCurentUserDetails();
     });
@@ -82,7 +82,7 @@ export class DashboardComponent implements OnInit{
             this.userMap.set(project.owner.id,false);
           }
          }
-         console.log('userMa',this.userMap)
+        //  console.log('userMa',this.userMap)
       }
       }
     },(error)=>{
@@ -100,7 +100,7 @@ export class DashboardComponent implements OnInit{
   openProjectDetail(project: any): void {
     this.dialog.open(ProjectDetailDialogComponent, {
       width :'60vw',
-    maxHeight: '80vh',
+      maxHeight: '80vh',
       data: { project },
       panelClass: 'custom-dialog-container' // Add a custom class if needed
     });
