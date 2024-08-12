@@ -1,8 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { error } from 'console';
-import { response } from 'express';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ToastrService } from 'ngx-toastr';
 
@@ -15,10 +13,12 @@ export class AssignMemberComponent implements OnInit {
   baseUrl : string ="http://localhost:8080/api/v1";
   project: any;
   users: any[] = [];
+  dropDownData : any [] = [];
   selectedMembers: any[] = [];;
   assignedMembers: any[] = [];
   dropdownSettings:IDropdownSettings={};
   isButtonDisable : boolean = false;
+  checkBoxSelectLimit : number = 5;
 
   id : number = -1;
   name : string =""
@@ -30,28 +30,31 @@ export class AssignMemberComponent implements OnInit {
     let id = this.route.snapshot.paramMap.get('id');
     if(id){
       this.fetchProjectDataId(id);
-    
     }
-    this.dropdownSettings = {
-      idField: 'id',
-      textField: 'name',
-      allowSearchFilter: true,
-      enableCheckAll: false,
-      limitSelection: 5
-    };
   }
 
-  fetchProjectDataId(id:string): void {
-    this.http.get(this.baseUrl+"/project/"+id).subscribe((response:any)=>{
+ fetchProjectDataId(id:string): void {
+      this.http.get(this.baseUrl+"/project/"+id).subscribe((response:any)=>{
       if(response){
         this.project = response;
         this.assignedMembers = this.project.members
         this.getUserslist();
-        console.log('data',this.project)
-        console.log('members data',  this.assignedMembers)
+        // console.log('data',this.project)
+        // console.log('members data',  this.assignedMembers)
         if( this.assignedMembers.length >= 5){
           this.isButtonDisable = true
-        } 
+        }
+        this.checkBoxSelectLimit = this.checkBoxSelectLimit-this.assignedMembers.length;
+        // console.log("limit", this.checkBoxSelectLimit);
+        this.dropdownSettings = {
+          idField: 'id',
+          textField: 'name',
+          allowSearchFilter: true,
+          enableCheckAll: false,
+          limitSelection: this.checkBoxSelectLimit
+        }; 
+
+        
       }
      },(error)=>{
       console.log('Error while getting project data',error);
@@ -63,7 +66,11 @@ export class AssignMemberComponent implements OnInit {
     this.http.get(this.baseUrl+"/getAllUsers").subscribe((response:any)=>{
      if(response){
       this.users = response
-      console.log("all members", this.users)
+      // console.log("all members", this.users)
+      this.dropDownData = this.users.filter(user => 
+        !this.assignedMembers.some(assignedMember => assignedMember.username === user.username)
+      );
+      // console.log('drop down data', this.dropDownData)
      }
     },(error)=>{
       console.log("Error while getting users data", error)
@@ -80,10 +87,13 @@ export class AssignMemberComponent implements OnInit {
       }
       this.selectedMembers.push(item);
     }
+    if(this.selectedMembers.length === this.checkBoxSelectLimit){
+      this.toastr.warning('Max 5 members Allowed','Warning')
+    }
   }
 
   onDeSelect(item: any) {
-    console.log('Deselected Item:', item);
+    // console.log('Deselected Item:', item);
     this.selectedMembers = this.selectedMembers.filter(member => member.id !== item.id);
   }
 

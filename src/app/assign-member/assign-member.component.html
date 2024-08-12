@@ -16,8 +16,8 @@
                   <p><strong>Status:</strong> {{ project.status }}</p>
                 </div>
                 <div class="col-md-6">
-                  <p><strong>Start Date:</strong> {{ project.startDateTime}}</p>
-                  <p><strong>End Date:</strong> {{ project.endDateTime }}</p>
+                  <p><strong>Start Date:</strong> {{ project.startDateTime | date:'dd-MM-yyyy'}}</p>
+                  <p><strong>End Date:</strong> {{ project.endDateTime | date:'dd-MM-yyyy'}}</p>
                 </div>
               </div>
             </div>
@@ -34,7 +34,7 @@
                   <label for="selectedMember">Select Member:</label>
                   <ng-multiselect-dropdown
                     [settings]="dropdownSettings"
-                    [data]="users"
+                    [data]="dropDownData"
                     [(ngModel)]="project.members.id"
                     (onSelect)="onItemSelect($event)"
                     (onDeSelect)="onDeSelect($event)">
