@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit{
       this.http.get(apiUrl).subscribe((response: any) => {
         this.projectData = response;
         this.isLoading = false;
-        console.log(this.projectData);
+        // console.log(this.projectData);
         this.fetchCurentUserDetails();
       });
     }

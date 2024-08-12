@@ -40,11 +40,9 @@ export class RegisterComponent {
       }
       this.http.post(this.baseUrl+"/registration",userDto).subscribe((response:any)=>{
         if(response.data){
-          // alert(response.msg);
           this.toastr.success(response.msg,'Success')
           this.router.navigateByUrl('/login');
         }else{
-          // alert(response.msg);
           this.toastr.error(response.msg,'Error')
         }
       });      

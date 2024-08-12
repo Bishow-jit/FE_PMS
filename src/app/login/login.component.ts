@@ -28,7 +28,6 @@ export class LoginComponent {
         (response: any) => {
           if (response && response.message === 'Success') {
             // console.log('resp', response);
-            // alert('Login Success');
             this.toastr.success('Successful Log', 'Login Success');
             localStorage.setItem('token', response.accessToken);
             this.router.navigateByUrl('/layout');
@@ -36,7 +35,6 @@ export class LoginComponent {
         },
         (error: any) => {
           // console.error('Login error:', error);
-          // alert('Invalid Username or Password');
           this.toastr.error('Invalid Username or Password','Login Fail')
           this.router.navigateByUrl('/login');
         }

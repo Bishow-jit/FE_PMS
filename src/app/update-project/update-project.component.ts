@@ -31,7 +31,6 @@ export class UpdateProjectComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log('project Data',this.data.project)
     this.id=this.data.project.id;
     this.name=this.data.project.name;
     this.intro=this.data.project.intro;
@@ -77,7 +76,6 @@ export class UpdateProjectComponent implements OnInit {
     if(id && projectDto){
        this.http.put(this.baseUrl+"/update/project/"+id,projectDto).subscribe((response:any)=>{
         if(response){
-          // alert("Update Successful");
           this.toastr.success('Update Successful','Success')
           this.router.navigateByUrl('/layout');
           this.onClose();

@@ -102,7 +102,6 @@ export class AssignMemberComponent implements OnInit {
     if(this.selectedMembers && id){
       this.http.post(this.baseUrl+"/add/project/members/"+id,this.selectedMembers).subscribe((response:any)=>{
       if(response.data){
-        // alert(response.msg)
         // this.assignedMembers = response.data.members;
         // console.log("members",this.assignedMembers);
         this.toastr.success(response.msg,'Member Added')

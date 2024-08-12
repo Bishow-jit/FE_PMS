@@ -18,7 +18,7 @@ export class TableDataComponent implements OnInit  {
     const apiUrl = 'https://reqres.in/api/users';
     this.http.get<any>(apiUrl).subscribe(
       response => {
-        console.log('API response:', response);
+        // console.log('API response:', response);
         this.usersData = response.data; 
         this.isLoading = false;
       },

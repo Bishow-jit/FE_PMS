@@ -38,7 +38,6 @@ openDeleteModal() {
         this.toastr.warning('Project Deleted','Delete')
         this.onClose();
       }else{
-        alert(response.msg)
         this.toastr.error(response.msg,'Error')
       }
     },(error)=>{

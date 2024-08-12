@@ -32,14 +32,12 @@ export class CreateProjectComponent {
     this.http.post(this.baseUrl + "/create/project", projectDto).subscribe(
       (response: any) => {
         if (response) {
-          // alert("Project Created Successfully");
           this.toastr.success('Project Created Successfully','Success')
           this.router.navigate(['/layout']);
         }
       },
       error => {
         console.error('Error creating project:', error);
-        // alert('Failed to create project. Please try again.');
         this.toastr.error('Failed to create project. Please try again.','Error')
       }
     );
