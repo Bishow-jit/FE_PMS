@@ -5,13 +5,13 @@
             <nav>
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link text-white" [routerLink]="['/layout']">Home</a>
+                        <a class="nav-link text-white" [routerLink]="['/layout/dashboard']">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" [routerLink]="['/tabledata']">User Table</a>
+                        <a class="nav-link text-white" [routerLink]="['/layout/tabledata']">User Table</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" [routerLink]="['/createProject']">Create Project</a>
+                        <a class="nav-link text-white" [routerLink]="['/layout/createProject']">Create Project</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-white" (click)="downloadReport()">Download Report</a>
@@ -24,4 +24,4 @@
         </div>
     </div>
 </header>
-<app-dashboard></app-dashboard>
+<router-outlet></router-outlet>

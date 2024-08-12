@@ -77,7 +77,7 @@ export class UpdateProjectComponent implements OnInit {
        this.http.put(this.baseUrl+"/update/project/"+id,projectDto).subscribe((response:any)=>{
         if(response){
           this.toastr.success('Update Successful','Success')
-          this.router.navigateByUrl('/layout');
+          this.router.navigateByUrl('/layout/dashboard');
           this.onClose();
         }
        },(error)=>{

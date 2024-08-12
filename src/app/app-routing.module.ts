@@ -25,24 +25,25 @@ const routes: Routes = [
       {
         path :'dashboard',
         component : DashboardComponent
-      }
+      },
+      {
+        path : 'createProject',
+        component : CreateProjectComponent
+      },
+      {
+        path : 'tabledata',
+        component :TableDataComponent
+      },
+      {
+        path:'assign-member/:id',
+        component : AssignMemberComponent
+      },
     ]
   },
-  {
-    path : 'createProject',
-    component : CreateProjectComponent
-  },
+  
   {
     path :'register',
     component : RegisterComponent
-  },
-  {
-    path : 'tabledata',
-    component :TableDataComponent
-  },
-  {
-    path:'assign-member/:id',
-    component : AssignMemberComponent
   },
   {
     path :"**",

@@ -93,7 +93,7 @@ export class DashboardComponent implements OnInit{
 
   addMember(id:number){
     if(id){
-      this.router.navigateByUrl('/assign-member/'+id);
+      this.router.navigateByUrl('/layout/assign-member/'+id);
     }
   }
 

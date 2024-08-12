@@ -33,7 +33,7 @@ export class CreateProjectComponent {
       (response: any) => {
         if (response) {
           this.toastr.success('Project Created Successfully','Success')
-          this.router.navigate(['/layout']);
+          this.router.navigate(['/layout/dashboard']);
         }
       },
       error => {

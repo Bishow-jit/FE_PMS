@@ -28,9 +28,9 @@ export class LoginComponent {
         (response: any) => {
           if (response && response.message === 'Success') {
             // console.log('resp', response);
-            this.toastr.success('Successful Log', 'Login Success');
+            this.toastr.success('Successful Login', 'Login Success');
             localStorage.setItem('token', response.accessToken);
-            this.router.navigateByUrl('/layout');
+            this.router.navigateByUrl('/layout/dashboard');
           }
         },
         (error: any) => {

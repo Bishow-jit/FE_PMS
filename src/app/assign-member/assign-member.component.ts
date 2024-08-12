@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { ToastrService } from 'ngx-toastr';
 
@@ -22,7 +22,7 @@ export class AssignMemberComponent implements OnInit {
 
   id : number = -1;
   name : string =""
-  constructor (private toastr: ToastrService,private route: ActivatedRoute , private http : HttpClient){
+  constructor (private router:Router,private toastr: ToastrService,private route: ActivatedRoute , private http : HttpClient){
 
   }
 
@@ -104,6 +104,7 @@ export class AssignMemberComponent implements OnInit {
       if(response.data){
         // this.assignedMembers = response.data.members;
         // console.log("members",this.assignedMembers);
+        this.router.navigateByUrl('/layout/dashboard');
         this.toastr.success(response.msg,'Member Added')
       }
       },(error)=>{
