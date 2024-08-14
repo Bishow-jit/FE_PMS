@@ -98,9 +98,15 @@ export class DashboardComponent implements OnInit{
   }
 
   openProjectDetail(project: any): void {
+    let maxHeightValue : string;
+    if(project.members.length>0){
+      maxHeightValue = '80vh'
+    }else{
+      maxHeightValue = '60vh'
+    }
     this.dialog.open(ProjectDetailDialogComponent, {
       width :'60vw',
-      maxHeight: '80vh',
+      maxHeight : maxHeightValue,
       data: { project },
       panelClass: 'custom-dialog-container' // Add a custom class if needed
     });

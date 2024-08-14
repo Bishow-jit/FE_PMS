@@ -15,7 +15,7 @@
         <p><strong>Project Owner Email:</strong> {{ data.project.owner.email}}</p>
         <p><strong>Project Owner Contact:</strong> {{ data.project.owner.mobileNo}}</p>
     </div>
-    <div class="card-header">
+    <div *ngIf="data.project.members.length>0" class="card-header">
         <h4>Assigned Project Members</h4>
     </div>
     <div class="mt-2 ">
