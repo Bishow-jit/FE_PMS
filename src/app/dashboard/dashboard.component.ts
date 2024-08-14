@@ -32,15 +32,10 @@ export class DashboardComponent implements OnInit{
     if(this.startDateTime && this.endDateTime){
       let startDate = new Date (this.startDateTime).toISOString().split('.')[0];
       let endDate = new Date (this.endDateTime).toISOString().split('.')[0];
-      // console.log('parameter',{
-      //   startDate,
-      //   endDate
-      // })
       const apiUrl = `${this.baseUrl}/project/withinDateRange?StartDateTime=${startDate}&EndDateTime=${endDate}`;
       this.http.get(apiUrl).subscribe((response: any) => {
         this.projectData = response;
         this.isLoading = false;
-        // console.log(this.projectData);
         this.fetchCurentUserDetails();
       });
     }
@@ -50,23 +45,30 @@ export class DashboardComponent implements OnInit{
 
     const now = new Date();
 
-    // Get the first day of the current month
-    const startDate = new Date(now.getFullYear(), now.getMonth(), 1).toISOString().split('.')[0];
-    // console.log('startDate', startDate);
+    const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+    const startDateTime = this.formatDate(startOfMonth);
 
-    // Get the last day of the current month
-    const endDate = new Date(now.getFullYear(), now.getMonth() + 1, 0).toISOString().split('.')[0];
-    // console.log('endDate', endDate);
-    const apiUrl = `${this.baseUrl}/project/withinDateRange?StartDateTime=${startDate}&EndDateTime=${endDate}`;
-    // console.log('api', apiUrl)
+    let endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+    let endDateTime = this.formatDate(endOfMonth);
+
+    const apiUrl = `${this.baseUrl}/project/withinDateRange?StartDateTime=${startDateTime}&EndDateTime=${endDateTime}`;
     this.http.get(apiUrl).subscribe((response: any) => {
-      // console.log('resp', response);
       this.projectData = response;
-      // console.log('projectdata', this.projectData)
       this.isLoading = false;
       this.fetchCurentUserDetails();
     });
 
+  }
+
+   formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const seconds = String(date.getSeconds()).padStart(2, '0');
+  
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
   }
 
   fetchCurentUserDetails(): void{
@@ -82,7 +84,6 @@ export class DashboardComponent implements OnInit{
             this.userMap.set(project.owner.id,false);
           }
          }
-        //  console.log('userMa',this.userMap)
       }
       }
     },(error)=>{
