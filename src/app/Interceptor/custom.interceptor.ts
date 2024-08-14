@@ -36,6 +36,6 @@ export const customInterceptor: HttpInterceptorFn = (req, next) => {
     }
   }
 
-  console.log("no token available")
+  // console.log("no token available")
   return next(req);
 };

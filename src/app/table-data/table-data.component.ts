@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableDataComponent implements OnInit  {
   usersData : any[] = [];
-  isLoading: boolean = true;
   page = 1;
   perPage : number = 0;
   totalPages : number = 0; // This should be updated dynamically from the API response
@@ -27,11 +26,9 @@ export class TableDataComponent implements OnInit  {
         this.totalPages = response.total_pages;
         this.perPage = response.per_page;
         this.totalPagesArray = Array.from({ length: this.totalPages }, (_, i) => i + 1);
-        this.isLoading = false;
       },
       error => {
         console.error('Error fetching data:', error);
-        this.isLoading = false;
       }
     );
   }
