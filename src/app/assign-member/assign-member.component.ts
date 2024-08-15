@@ -104,12 +104,14 @@ export class AssignMemberComponent implements OnInit {
       if(response.data){
         // this.assignedMembers = response.data.members;
         // console.log("members",this.assignedMembers);
-        this.router.navigateByUrl('/layout/dashboard');
+        this.toastr.toastrConfig.preventDuplicates = true;
         this.toastr.success(response.msg,'Member Added')
+        this.router.navigateByUrl('/layout/dashboard');
+        
       }
       },(error)=>{
         //this.toastr.error('Error While Member Assigning','Error')
-        // console.log("Error While posting member assign data",error)
+        console.log("Error While posting member assign data",error)
 
       })
     }
