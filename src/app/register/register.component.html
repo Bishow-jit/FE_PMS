@@ -33,6 +33,7 @@
                 class="form-control" 
                 placeholder="Email" 
                 required
+                email
                 #emailCtrl="ngModel">
               <div *ngIf="emailCtrl.invalid && emailCtrl.touched" class="text-danger">
                 Email is required and must be a valid email.
@@ -111,11 +112,11 @@
                 <a routerLink="/login" class="ms-1">Login</a>
               </div>
               <button type="submit" class="btn btn-primary" 
-              [disabled]="nameCtrl.invalid && 
-               emailCtrl.invalid &&
-               mobileNoCtrl.invalid &&
-               genderCtrl.invalid && 
-               passwordCtrl.invalid && 
+              [disabled]="nameCtrl.invalid || 
+               emailCtrl.invalid ||
+               mobileNoCtrl.invalid ||
+               genderCtrl.invalid ||
+               passwordCtrl.invalid ||
                passwordCtrl.invalid">Register</button>
             </div>
           </form>

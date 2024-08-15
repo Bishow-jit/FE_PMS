@@ -42,7 +42,7 @@
               <button type="submit" class="btn btn-primary btn-block" [disabled]="passwordCtrl.invalid || passwordCtrl.invalid">Login</button>
               <div class="d-flex flex-row justify-content-center mt-3">
                 <p>Don't have an account?</p>
-                <a routerLink="/register" class="ms-1">Register</a>
+                <a [routerLink]="['/register']" class="ms-1">Register</a>
               </div>
             </div>
           </form>

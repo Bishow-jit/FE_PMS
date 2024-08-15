@@ -28,6 +28,7 @@ export class LoginComponent {
         (response: any) => {
           if (response && response.message === 'Success') {
             // console.log('resp', response);
+            this.toastr.toastrConfig.timeOut = 1000;
             this.toastr.success('Successful Login', 'Login Success');
             localStorage.setItem('token', response.accessToken);
             this.router.navigateByUrl('/layout/dashboard');

@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -20,6 +20,8 @@ import { UpdateProjectComponent } from './update-project/update-project.componen
 import { DeletePeojectComponent } from './delete-peoject/delete-peoject.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import { ToastrModule } from 'ngx-toastr';
     AssignMemberComponent,
     ProjectDetailDialogComponent,
     UpdateProjectComponent,
-    DeletePeojectComponent
+    DeletePeojectComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -43,6 +46,7 @@ import { ToastrModule } from 'ngx-toastr';
     NgMultiSelectDropDownModule,
     BrowserAnimationsModule, 
     ToastrModule.forRoot(),
+    ReactiveFormsModule
   ],
   providers: [
     provideHttpClient(withInterceptors([customInterceptor]),withFetch()),

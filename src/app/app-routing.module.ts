@@ -7,6 +7,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { TableDataComponent } from './table-data/table-data.component';
 import { CreateProjectComponent } from './create-project/create-project.component';
 import { AssignMemberComponent } from './assign-member/assign-member.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
         path:'assign-member/:id',
         component : AssignMemberComponent
       },
+      {
+        path :'user-profile',
+        component : UserProfileComponent
+      }
     ]
   },
   

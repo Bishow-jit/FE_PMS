@@ -14,10 +14,14 @@
                         <a class="nav-link text-white" [routerLink]="['/layout/createProject']">Create Project</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" (click)="downloadReport()">Download Report</a>
+                        <a class="nav-link text-white" [routerLink]="[]" (click)="downloadReport()">Download Report</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link text-white" [routerLink]="['/layout/user-profile']">My Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" (click)="logout()">LogOut</a>
+                        <a class="nav-link text-white" [routerLink]="[]" (click)="logout()">LogOut</a>
                     </li>
                 </ul>
             </nav>
